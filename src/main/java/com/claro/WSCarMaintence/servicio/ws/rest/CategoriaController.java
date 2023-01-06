@@ -38,7 +38,7 @@ public class CategoriaController {
 		List <Categoria> listaCategorias = new ArrayList<Categoria>();	
 		try {
 			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("biblioteca.PRC_ADM_CATEGORIAS");
+					.createStoredProcedureQuery("bibliotecal.PRC_ADM_CATEGORIAS");
 			
 			// Registrar los parámetros de entrada y salida
 			storedProcedureQuery.registerStoredProcedureParameter("IN_ACCION", String.class, ParameterMode.IN);
