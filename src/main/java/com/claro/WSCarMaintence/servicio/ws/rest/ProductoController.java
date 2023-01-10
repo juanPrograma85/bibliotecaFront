@@ -1,5 +1,6 @@
 package com.claro.WSCarMaintence.servicio.ws.rest;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -96,7 +97,7 @@ public class ProductoController {
 					 (String) result[6],
 					 (String) result[7],
 					 (Date) result[8],
-					 (Integer) result[9],
+					 ((BigInteger) result[9]).intValue(),
 					 (String) result[10])).collect(Collectors.toList());
 
 			// Obtenemos los valores de salida
