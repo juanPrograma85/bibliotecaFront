@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +32,9 @@ import com.claro.WSCarMaintence.model.Prestamo;
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 public class UtilitarioController {
 	
+	@Autowired
+    private Environment env;
+	
 		private final EntityManager entityManager;
 
 		public UtilitarioController(EntityManager entityManager) {
@@ -44,7 +49,7 @@ public class UtilitarioController {
 			PropiedadesResponseDTO response = new PropiedadesResponseDTO();
 			try {
 				StoredProcedureQuery storedProcedureQuery = entityManager
-						.createStoredProcedureQuery("biblioteca.PRC_ADM_PARAMETROS"); 
+						.createStoredProcedureQuery(env.getProperty("app.schema")+"PRC_ADM_PARAMETROS"); 
 
 				// Registrar los parámetros de entrada y salida
 				storedProcedureQuery.registerStoredProcedureParameter("IN_COD_APP", String.class, ParameterMode.IN);
