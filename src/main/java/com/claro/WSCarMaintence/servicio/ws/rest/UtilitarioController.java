@@ -49,7 +49,7 @@ public class UtilitarioController {
 			PropiedadesResponseDTO response = new PropiedadesResponseDTO();
 			try {
 				StoredProcedureQuery storedProcedureQuery = entityManager
-						.createStoredProcedureQuery(env.getProperty("app.schema")+"PRC_ADM_PARAMETROS"); 
+						.createStoredProcedureQuery(env.getProperty("app.schema")+".PRC_ADM_PARAMETROS"); 
 
 				// Registrar los parámetros de entrada y salida
 				storedProcedureQuery.registerStoredProcedureParameter("IN_COD_APP", String.class, ParameterMode.IN);
