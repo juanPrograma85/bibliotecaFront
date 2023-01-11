@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +25,8 @@ import com.claro.WSCarMaintence.model.Categoria;
 @RequestMapping(path = "/categorias")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 public class CategoriaController {
+	@Autowired
+    private Environment env;
 
 	private final EntityManager entityManager;
 	
@@ -38,7 +42,7 @@ public class CategoriaController {
 		List <Categoria> listaCategorias = new ArrayList<Categoria>();	
 		try {
 			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("biblioteca.PRC_ADM_CATEGORIAS");
+					.createStoredProcedureQuery(env.getProperty("app.schema")+".PRC_ADM_CATEGORIAS");
 			
 			// Registrar los parámetros de entrada y salida
 			storedProcedureQuery.registerStoredProcedureParameter("IN_ACCION", String.class, ParameterMode.IN);

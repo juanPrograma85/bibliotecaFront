@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +28,8 @@ import com.claro.WSCarMaintence.model.Categoria;
 @RequestMapping(path = "/autor")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST})
 public class AutorController {
+	@Autowired
+    private Environment env;
 
 	private final EntityManager entityManager;
 	
@@ -39,7 +43,7 @@ public class AutorController {
 	public ResponseEntity <List<Autor>> consultarAutor(@RequestParam(name = "id_autor", required = false) Integer id_autor) {
 		List<Autor> autor = new ArrayList<Autor>();
 
-		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("biblioteca.PRC_ADM_AUTOR");		
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery(env.getProperty("app.schema")+".PRC_ADM_AUTOR");		
 		
 		// Registrar los parámetros de entrada y salida
         storedProcedureQuery.registerStoredProcedureParameter("IN_ACCION", String.class, ParameterMode.IN);
